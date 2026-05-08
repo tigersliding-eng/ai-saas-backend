@@ -1,0 +1,26 @@
+{
+  "name": "ai-saas-backend",
+  "version": "1.0.0",
+  "description": "AI Trade Pro backend service — DeepSeek-powered customer acquisition plan generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "encrypt:key": "node encrypt-key.js"
+  },
+  "keywords": [
+    "ai",
+    "saas",
+    "deepseek",
+    "b2b",
+    "trade"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.16.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  }
+}
