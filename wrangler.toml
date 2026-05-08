@@ -1,0 +1,19 @@
+name = "ai-saas-backend"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[env.production]
+name = "ai-saas-backend-prod"
+route = "api.example.com/*"
+zone_id = ""
+
+[build]
+command = "npm install"
+cwd = "./"
+
+[build.upload]
+format = "modules"
+main = "./index.js"
