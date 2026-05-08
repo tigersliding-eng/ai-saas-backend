@@ -202,6 +202,17 @@ Body text" directly in the string.`;
   }
 });
 
+// 404 处理
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found', path: req.path, method: req.method });
+});
+
+// 全局错误处理
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`
