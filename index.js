@@ -39,9 +39,80 @@ function getApiKey() {
 app.use(cors());
 app.use(express.json());
 
-// Health check
+// Serve static files (if any)
+app.use(express.static('public'));
+
+// Root route with API documentation
 app.get('/', (req, res) => {
-  res.json({ status: 'ok', service: 'AI Trade Pro Backend' });
+  const html = `
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>AI Trade Pro Backend</title>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; margin-top: 0; }
+        .status { display: inline-block; padding: 8px 16px; background: #10b981; color: white; border-radius: 4px; margin: 10px 0; }
+        .endpoint { background: #f0f0f0; padding: 20px; margin: 20px 0; border-left: 4px solid #3b82f6; border-radius: 4px; }
+        .method { display: inline-block; padding: 4px 8px; background: #3b82f6; color: white; border-radius: 3px; font-weight: bold; margin-right: 10px; }
+        .url { font-family: monospace; font-size: 14px; color: #d97706; margin: 10px 0; }
+        code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; }
+        pre { background: #1f2937; color: #d1d5db; padding: 15px; border-radius: 4px; overflow-x: auto; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>🤖 AI Trade Pro Backend</h1>
+        <p class="status">✅ Service Running</p>
+        <p>DeepSeek-powered customer acquisition plan generator for B2B trade</p>
+        
+        <h2>Available Endpoints</h2>
+        
+        <div class="endpoint">
+          <div class="method">GET</div>
+          <div class="url">/</div>
+          <p>Health check and API documentation (this page)</p>
+        </div>
+        
+        <div class="endpoint">
+          <div class="method">POST</div>
+          <div class="url">/api/generate</div>
+          <p>Generate a customer acquisition plan</p>
+          <p><strong>Request Body:</strong></p>
+          <pre>{
+  "industry": "制造业",
+  "productName": "智能机床",
+  "market": "欧洲",
+  "customerType": "中小企业",
+  "advantages": "高精度、高效率",
+  "language": "zh"
+}</pre>
+          <p><strong>Response:</strong> JSON object with 5 modules of acquisition strategy</p>
+        </div>
+        
+        <h2>Example Usage</h2>
+        <pre>curl -X POST http://localhost:3000/api/generate \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "industry": "IT",
+    "productName": "SaaS Platform",
+    "market": "Europe",
+    "customerType": "SME",
+    "language": "en"
+  }'</pre>
+        
+        <p style="color: #666; margin-top: 30px; font-size: 12px;">
+          Powered by DeepSeek API | Node.js + Express
+        </p>
+      </div>
+    </body>
+    </html>
+  `;
+  res.header('Content-Type', 'text/html; charset=utf-8');
+  res.send(html);
 });
 
 // Generate customer acquisition plan
