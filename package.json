@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "encrypt:key": "node encrypt-key.js"
+    "encrypt:key": "node encrypt-key.js",
+    "build": "echo 'AI Trade Pro backend is ready to deploy'",
+    "test": "echo 'Backend ready for testing'"
   },
   "keywords": [
     "ai",
